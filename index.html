@@ -1,17 +1,1549 @@
 <!doctype html>
-<html lang="it">
+<html lang="it" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Resin-home Serena | Creazioni in resina personalizzate a Grosso Canavese (Torino)</title>
-    <!-- Google Fonts: Cormorant Garamond (Logo / Display), Playfair Display (Headings), Lato (Body) -->
+    <title>Resin-home Serena | Creazioni in resina personalizzate a Torino</title>
+    
+    <!-- Google Fonts: Cormorant Garamond (Logo), Playfair Display (Headings), Lato (Body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS v4 browser runtime compiler -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Lucide Icons library via CDN (used for elegant decoration icons) -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+      /* --- Custom Brand Palette Definition (Variables) --- */
+      :root {
+        --color-black: #0d0d0d;
+        --color-emerald: #1a6b3a;
+        --color-emerald2: #2d9e58;
+        --color-gold: #c8a951;
+        --color-gold-light: #e8c97a;
+        --color-cream: #f5f0e8;
+        --color-offwhite: #faf8f4;
+        --color-dark-green: #0f3d22;
+      }
+
+      /* Custom Font Mappings */
+      .font-logo {
+        font-family: "Cormorant Garamond", serif;
+      }
+      .font-heading {
+        font-family: "Playfair Display", serif;
+      }
+      .font-body {
+        font-family: "Lato", sans-serif;
+      }
+
+      /* --- Dynamic Malachite / Green Marble Texture in Pure CSS --- */
+      .bg-malachite-pattern {
+        background-color: var(--color-black);
+        background-image: 
+          radial-gradient(ellipse at 15% 25%, rgba(45, 158, 88, 0.28) 0%, transparent 55%),
+          radial-gradient(ellipse at 85% 75%, rgba(26, 107, 58, 0.4) 0%, transparent 65%),
+          radial-gradient(ellipse at 50% 45%, rgba(45, 158, 88, 0.18) 0%, transparent 50%),
+          linear-gradient(135deg, rgba(13, 13, 13, 0.99) 0%, rgba(15, 61, 34, 0.94) 45%, rgba(26, 107, 58, 0.91) 55%, rgba(13, 13, 13, 1) 100%),
+          repeating-radial-gradient(circle at 12% 12%, rgba(45, 158, 88, 0.09) 0px, rgba(45, 158, 88, 0.09) 8px, transparent 16px, transparent 32px),
+          repeating-radial-gradient(circle at 88% 78%, rgba(26, 107, 58, 0.09) 0px, rgba(26, 107, 58, 0.09) 12px, transparent 24px, transparent 48px);
+        background-blend-mode: normal, screen, screen, normal, overlay, overlay;
+      }
+
+      /* Gold thread and light effects */
+      .gold-glow {
+        filter: drop-shadow(0 0 10px rgba(200, 169, 81, 0.45));
+      }
+      .gold-glow-hover:hover {
+        filter: drop-shadow(0 0 14px rgba(232, 201, 122, 0.75));
+      }
+      .text-glow-gold {
+        text-shadow: 0 0 8px rgba(232, 201, 122, 0.55);
+      }
+
+      /* --- Custom Animations --- */
+      @keyframes floatUp {
+        0% {
+          transform: translateY(0px) scale(0.6) rotate(0deg);
+          opacity: 0;
+        }
+        15% {
+          opacity: 0.6;
+        }
+        85% {
+          opacity: 0.45;
+        }
+        100% {
+          transform: translateY(-130px) scale(1.3) rotate(180deg);
+          opacity: 0;
+        }
+      }
+
+      .particle-sparkle {
+        animation: floatUp linear infinite;
+      }
+
+      /* --- IntersectionObserver Scroll Reveal --- */
+      .reveal {
+        opacity: 0;
+        transform: translateY(35px);
+        transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+      .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* --- Pulsing Ring for WhatsApp Floating Button --- */
+      @keyframes whatsapp-pulse-ring {
+        0% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(45, 158, 88, 0.7);
+        }
+        70% {
+          transform: scale(1);
+          box-shadow: 0 0 0 12px rgba(45, 158, 88, 0);
+        }
+        100% {
+          transform: scale(0.95);
+          box-shadow: 0 0 0 0 rgba(45, 158, 88, 0);
+        }
+      }
+      .whatsapp-pulse {
+        animation: whatsapp-pulse-ring 2.6s infinite;
+      }
+
+      /* Glass navbar design */
+      .glass-nav {
+        background: rgba(13, 13, 13, 0.85);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid rgba(200, 169, 81, 0.2);
+      }
+
+      /* CSS dotted lines for step connection */
+      .step-dotted-line {
+        background-image: linear-gradient(to right, rgba(200, 169, 81, 0.3) 40%, rgba(255, 255, 255, 0) 0%);
+        background-position: bottom;
+        background-size: 8px 1.5px;
+        background-repeat: repeat-x;
+      }
+    </style>
   </head>
-  <body class="bg-[#faf8f4] text-[#0d0d0d] antialiased selection:bg-[#c8a951]/30 selection:text-[#0d0d0d]">
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="bg-[#faf8f4] text-[#0d0d0d] antialiased selection:bg-[#c8a951]/25 selection:text-[#0d0d0d] font-body overflow-x-hidden">
+
+    <!-- ==========================================
+         1. NAVBAR FISSA (GLASS DESIGN)
+         ========================================== -->
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-300 bg-transparent py-5">
+      <div class="max-w-7xl mx-auto px-4 md:px-8 flex items-center justify-between">
+        
+        <!-- Brand logo triggers scroll back to top -->
+        <a href="#hero" class="flex flex-col items-start focus:outline-none group text-left cursor-pointer">
+          <span class="font-logo text-2xl md:text-3xl text-[#c8a951] font-semibold tracking-wide transition-colors duration-300 group-hover:text-[#e8c97a]">
+            Resin-home Serena
+          </span>
+          <span class="text-[10px] font-sans-lato uppercase tracking-[0.25em] text-[#faf8f4]/60 -mt-1 group-hover:text-[#faf8f4]/95 transition-colors duration-350">
+            Creazioni Artigianali
+          </span>
+        </a>
+
+        <!-- Desktop Navigation links -->
+        <div class="hidden md:flex items-center space-x-8">
+          <a href="#chi-sono" class="font-sans-lato text-sm font-medium tracking-wider text-[#faf8f4]/80 hover:text-[#c8a951] transition-colors duration-300">
+            Chi Sono
+          </a>
+          <a href="#galleria" class="font-sans-lato text-sm font-medium tracking-wider text-[#faf8f4]/80 hover:text-[#c8a951] transition-colors duration-300">
+            Galleria
+          </a>
+          <a href="#personalizza" class="font-sans-lato text-sm font-medium tracking-wider text-[#faf8f4]/80 hover:text-[#c8a951] transition-colors duration-300">
+            Personalizza
+          </a>
+          <a href="#mercatini" class="font-sans-lato text-sm font-medium tracking-wider text-[#faf8f4]/80 hover:text-[#c8a951] transition-colors duration-300">
+            Dove Trovarmi
+          </a>
+          <a href="#contatti" class="font-sans-lato text-sm font-medium tracking-wider text-[#faf8f4]/80 hover:text-[#c8a951] transition-colors duration-300">
+            Contatti
+          </a>
+        </div>
+
+        <!-- Desktop Social shortcut interactions -->
+        <div class="hidden md:flex items-center space-x-4">
+          <a href="https://instagram.com/resin_home_serena" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-[#c8a951] hover:text-[#e8c97a] hover:scale-110 transition-all duration-300">
+            <i data-lucide="instagram" class="w-5 h-5"></i>
+          </a>
+          <a href="https://wa.me/393202348856" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp" class="text-[#c8a951] hover:text-[#e8c97a] hover:scale-110 transition-all duration-300">
+            <i data-lucide="message-square" class="w-5 h-5"></i>
+          </a>
+        </div>
+
+        <!-- Mobile Hamburguer icon menu trigger -->
+        <div class="flex md:hidden items-center">
+          <button id="mobile-menu-btn" aria-label="Menu" class="p-2 text-[#c8a951] hover:text-[#e8c97a] focus:outline-none cursor-pointer">
+            <i data-lucide="menu" id="menu-icon" class="w-6 h-6"></i>
+          </button>
+        </div>
+
+      </div>
+    </nav>
+
+    <!-- Fullscreen Mobile Menu structure (Nero Overlay with oro items) -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 z-40 bg-[#0d0d0d] transition-all duration-500 ease-in-out opacity-0 pointer-events-none flex flex-col justify-center items-center">
+      <div class="flex flex-col space-y-8 text-center text-2xl font-heading">
+        <a href="#chi-sono" class="mobile-nav-link text-[#f5f0e8] hover:text-[#c8a951] transition-colors duration-300 tracking-wide">
+          Chi Sono
+        </a>
+        <a href="#galleria" class="mobile-nav-link text-[#f5f0e8] hover:text-[#c8a951] transition-colors duration-300 tracking-wide">
+          Galleria
+        </a>
+        <a href="#personalizza" class="mobile-nav-link text-[#f5f0e8] hover:text-[#c8a951] transition-colors duration-300 tracking-wide">
+          Personalizza
+        </a>
+        <a href="#mercatini" class="mobile-nav-link text-[#f5f0e8] hover:text-[#c8a951] transition-colors duration-300 tracking-wide">
+          Dove Trovarmi
+        </a>
+        <a href="#contatti" class="mobile-nav-link text-[#f5f0e8] hover:text-[#c8a951] transition-colors duration-300 tracking-wide">
+          Contatti
+        </a>
+      </div>
+
+      <!-- Mobile social targets link -->
+      <div class="flex space-x-12 mt-16">
+        <a href="https://instagram.com/resin_home_serena" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-[#c8a951] hover:text-[#e8c97a] text-sm tracking-widest font-sans-lato">
+          <i data-lucide="instagram" class="w-5 h-5"></i>
+          <span>Instagram</span>
+        </a>
+        <a href="https://wa.me/393202348856" target="_blank" rel="noopener noreferrer" class="flex items-center space-x-2 text-[#c8a951] hover:text-[#e8c97a] text-sm tracking-widest font-sans-lato">
+          <i data-lucide="message-circle" class="w-5 h-5"></i>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         2. HERO SECTION
+         ========================================== -->
+    <section id="hero" class="relative min-h-screen bg-malachite-pattern flex flex-col justify-center items-center px-4 md:px-8 overflow-hidden select-none">
+      
+      <!-- Gold sparkle floating particles backdrop canvas -->
+      <div id="sparkle-container" class="absolute inset-0 pointer-events-none z-10 overflow-hidden">
+        <!-- Generates particles in Javascript below -->
+      </div>
+      
+      <!-- Middle visual radial emission gold glow -->
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-[#1a6b3a]/15 rounded-full blur-[110px] pointer-events-none z-0"></div>
+
+      <!-- Hero main content alignment block -->
+      <div class="relative z-20 max-w-4xl text-center space-y-6 md:space-y-8 mt-16">
+        
+        <!-- Geographical and brand anchor badge details -->
+        <div class="flex items-center justify-center space-x-4 opacity-90 reveal active">
+          <div class="w-12 h-[1px] bg-gradient-to-r from-transparent to-[#c8a951]" />
+          <span class="text-[11px] uppercase tracking-[0.35em] text-[#e8c97a] font-medium font-sans-lato">
+            Grosso Canavese • Torino
+          </span>
+          <div class="w-12 h-[1px] bg-gradient-to-l from-transparent to-[#c8a951]" />
+        </div>
+
+        <!-- Big elegant main display typography -->
+        <div class="space-y-3">
+          <h1 class="font-logo text-6xl sm:text-7xl md:text-[8.5rem] text-[#c8a951] italic font-light drop-shadow-lg tracking-normal text-glow-gold">
+            Resin-home Serena
+          </h1>
+          
+          <div class="flex items-center justify-center mt-3">
+            <div class="h-[1px] w-20 bg-[#c8a951]/40" />
+            <p class="font-heading text-xl sm:text-2xl md:text-3xl text-[#e8c97a] italic font-normal tracking-wide px-4">
+              Creazioni in resina personalizzate
+            </p>
+            <div class="h-[1px] w-20 bg-[#c8a951]/40" />
+          </div>
+        </div>
+
+        <!-- Subtitle message block -->
+        <p class="max-w-xl sm:max-w-2xl mx-auto font-body text-base md:text-lg text-[#faf8f4]/85 leading-relaxed tracking-wide font-light">
+          Ogni pezzo è unico, creato interamente a mano a pochi passi da Torino. 
+          Sogni un colore specifico, un nastro fiorito o un ricordo da cristallizzare? 
+          Lo realizziamo insieme.
+        </p>
+
+        <!-- CTA action button grouping -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4 md:pt-6">
+          <a href="#galleria" class="w-full sm:w-auto px-8 py-4 bg-[#c8a951] hover:bg-[#e8c97a] text-[#0d0d0d] font-bold text-xs tracking-widest uppercase transition-all duration-300 text-center hover:scale-[1.03] active:scale-[0.98] focus:outline-none select-none gold-glow-hover">
+            Scopri la Galleria
+          </a>
+          
+          <a href="https://wa.me/393202348856" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-8 py-4 border border-[#c8a951]/60 hover:border-[#e8c97a] text-[#e8c97a] hover:text-[#faf8f4] hover:bg-[#c8a951]/10 font-medium text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center space-x-2">
+            <i data-lucide="message-square" class="w-4.5 h-4.5"></i>
+            <span>Scrivimi su WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Arrow down scroll indicator -->
+      <div id="scroll-wheel" class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center space-y-2 cursor-pointer opacity-70 hover:opacity-100 transition-opacity duration-300">
+        <span class="text-[9px] uppercase tracking-[0.4em] text-[#c8a951]/60">Scorri</span>
+        <div class="p-1.5 border border-[#c8a951]/30 rounded-full text-[#c8a951]/60 animate-bounce">
+          <i data-lucide="arrow-down" class="w-3.5 h-3.5"></i>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         3. CHI SONO SECTION (FONDO CREMA)
+         ========================================== -->
+    <section id="chi-sono" class="relative py-24 bg-[#f5f0e8] text-[#0f3d22] overflow-hidden scroll-mt-10">
+      
+      <!-- Ambient light decorative elements -->
+      <div class="absolute top-0 right-0 w-[240px] md:w-[350px] h-[240px] md:h-[350px] bg-[#c8a951]/5 rounded-full blur-[80px] pointer-events-none"></div>
+      <div class="absolute bottom-0 left-0 w-[240px] md:w-[400px] h-[240px] md:h-[400px] bg-[#1a6b3a]/5 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+        
+        <!-- Section Header metadata -->
+        <div class="text-center space-y-3 mb-16 reveal">
+          <span class="text-xs uppercase tracking-[0.3em] text-[#c8a951] font-bold">
+            ARTISTA E SOGNATRICE
+          </span>
+          <h2 class="font-heading text-3xl md:text-5xl text-[#0f3d22] font-semibold">
+            Chi Sono
+          </h2>
+          <div class="w-16 h-[2px] bg-[#c8a951] mx-auto mt-4" />
+        </div>
+
+        <!-- Content split grid: photo framework + story -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- Image frame mockup (5 cols) -->
+          <div class="lg:col-span-5 flex justify-center reveal">
+            <div class="relative group">
+              <!-- Golden double luxury framing decoration -->
+              <div class="absolute inset-0 border border-[#c8a951] translate-x-3.5 translate-y-3.5 transition-transform duration-500 group-hover:translate-x-1.5 group-hover:translate-y-1.5" />
+              <div class="absolute inset-0 border border-[#0f3d22]/15 -translate-x-2 -translate-y-2 pointer-events-none" />
+              
+              <!-- Core picture box with fallback svg trigger if profilo fails to load -->
+              <div class="relative w-[280px] h-[370px] sm:w-[325px] sm:h-[430px] bg-[#faf8f4] overflow-hidden shadow-lg border border-[#c8a951]/15">
+                <img
+                  src="./foto/profilo.jpg"
+                  alt="Serena - Resin Artist"
+                  class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  referrerpolicy="no-referrer"
+                  onerror="handleProfileImageFallback(this)"
+                />
+                
+                <!-- Inner soft gradient overlay -->
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0d0d0d]/40 via-transparent to-transparent opacity-85 pointer-events-none" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Presentation copy blocks (7 cols) -->
+          <div class="lg:col-span-7 space-y-6 md:space-y-8 text-left reveal">
+            <h3 class="font-heading text-2xl md:text-3.5xl font-medium italic text-[#1a6b3a] leading-tight">
+              "Ciao, sono Serena — artigiana, sognatrice, e costantemente piena di resina fino ai gomiti."
+            </h3>
+
+            <div class="space-y-4 font-body text-base md:text-lg text-[#0f3d22]/90 leading-relaxed font-light">
+              <p>
+                Ho seguito un corso, ho visto i colori disperdersi nel liquido per la prima volta, e da quel momento non ho più smesso. Nel mio laboratorio a pochi passi da Torino trasformo idee, colori e un po' di magia in oggetti che non esistono da nessun'altra parte.
+              </p>
+              <p>
+                Sono un po' sbadata, lo ammetto, ma quando creo divento un'altra persona: ogni dettaglio conta, ogni sfumatura ha la sua ragione. Quello che mi tiene incollata al laboratorio è la magia dei colori in movimento — come si disperdono, si mescolano, si inseguono prima di solidificarsi. È quella frazione di secondo in cui tutto è ancora fluido e possibile.
+              </p>
+              <p>
+                Ogni pezzo nasce da zero, fatto a mano, e non ne esiste un altro uguale al mondo. Quello che amo di più è la parte su misura: che tu abbia in mente un colore preciso, un nome da includere, un ricordo da custodire — io ci lavoro finché non diventa esattamente quello che sognavi.
+              </p>
+            </div>
+
+            <!-- Left elegant gold-border quote block -->
+            <div class="border-l-4 border-[#c8a951] pl-6 py-2 my-8 bg-[#c8a951]/6 rounded-r-lg pr-4">
+              <p class="font-heading text-lg md:text-xl font-medium italic text-[#1a6b3a]">
+                "Perché ogni creazione merita di essere unica, proprio come chi la riceve."
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Three major artisan values cards layout -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-24">
+          
+          <div class="bg-[#faf8f4] border border-[#c8a951]/15 p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-md hover:border-[#c8a951]/35 flex flex-col items-start text-left group reveal">
+            <div class="text-4xl mb-4 p-3 bg-[#f5f0e8] rounded-full transition-transform duration-300 group-hover:scale-110">
+              🤲
+            </div>
+            <h4 class="font-heading text-xl font-semibold text-[#0f3d22] mb-3">
+              Fatto a mano
+            </h4>
+            <p class="font-body text-[#5a5040] leading-relaxed text-sm font-light">
+              Ogni pezzo viene colato, rifinito e lucidato singolarmente e interamente a mano nel mio laboratorio canavesano.
+            </p>
+          </div>
+
+          <div class="bg-[#faf8f4] border border-[#c8a951]/15 p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-md hover:border-[#c8a951]/35 flex flex-col items-start text-left group reveal">
+            <div class="text-4xl mb-4 p-3 bg-[#f5f0e8] rounded-full transition-transform duration-300 group-hover:scale-110">
+              ✨
+            </div>
+            <h4 class="font-heading text-xl font-semibold text-[#0f3d22] mb-3">
+              Pezzi unici
+            </h4>
+            <p class="font-body text-[#5a5040] leading-relaxed text-sm font-light">
+              La resina chimica ha vita propria: le venature variano ad ogni colata, rendendo il tuo pezzo del tutto irripetibile.
+            </p>
+          </div>
+
+          <div class="bg-[#faf8f4] border border-[#c8a951]/15 p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-md hover:border-[#c8a951]/35 flex flex-col items-start text-left group reveal">
+            <div class="text-4xl mb-4 p-3 bg-[#f5f0e8] rounded-full transition-transform duration-300 group-hover:scale-110">
+              🎨
+            </div>
+            <h4 class="font-heading text-xl font-semibold text-[#0f3d22] mb-3">
+              Su misura per te
+            </h4>
+            <p class="font-body text-[#5a5040] leading-relaxed text-sm font-light">
+              Decidi tu i colori, le inclusioni botaniche e i formati ideali per esprimere al meglio il tuo stile personale.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         4. GALLERIA SECTION (FONDO OFFWHITE)
+         ========================================== -->
+    <section id="galleria" class="relative py-24 bg-[#faf8f4] text-[#0f3d22] scroll-mt-10">
+      <div class="max-w-7xl mx-auto px-4 md:px-8">
+        
+        <!-- Gallery Header -->
+        <div class="text-center space-y-3 mb-12 reveal">
+          <span class="text-xs uppercase tracking-[0.3em] text-[#c8a951] font-bold">
+            LE OPERE DISPONIBILI
+          </span>
+          <h2 class="font-heading text-3xl md:text-5xl text-[#0f3d22] font-semibold">
+            La Galleria delle Creazioni
+          </h2>
+          <p class="max-w-md mx-auto font-body text-[#5a5040] text-sm mt-2 font-light">
+            Ogni oggetto racchiude un attimo di magia liquida solidificata nel tempo. Filtra per categoria o tocca i "Dettagli" per saperne di più.
+          </p>
+          <div class="w-16 h-[2px] bg-[#c8a951] mx-auto mt-4" />
+        </div>
+
+        <!-- Filter Category Tabs navbar (Pure smooth visual filtering) -->
+        <div class="flex flex-wrap items-center justify-center gap-2 md:gap-4 mb-16 reveal">
+          <button onclick="filterGallery('Tutti', this)" class="gallery-tab-btn px-5 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-300 bg-[#c8a951] text-[#0d0d0d] shadow-sm border border-[#c8a951] cursor-pointer">
+            Tutti
+          </button>
+          <button onclick="filterGallery('Gioielli', this)" class="gallery-tab-btn px-5 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-300 bg-[#f5f0e8] text-[#0f3d22] hover:bg-[#c8a951]/10 border border-[#c8a951]/15 cursor-pointer">
+            Gioielli
+          </button>
+          <button onclick="filterGallery('Home Decor', this)" class="gallery-tab-btn px-5 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-300 bg-[#f5f0e8] text-[#0f3d22] hover:bg-[#c8a951]/10 border border-[#c8a951]/15 cursor-pointer">
+            Home Decor
+          </button>
+          <button onclick="filterGallery('Accessori', this)" class="gallery-tab-btn px-5 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-300 bg-[#f5f0e8] text-[#0f3d22] hover:bg-[#c8a951]/10 border border-[#c8a951]/15 cursor-pointer">
+            Accessori
+          </button>
+          <button onclick="filterGallery('Orologi', this)" class="gallery-tab-btn px-5 py-2.5 text-xs font-semibold tracking-widest uppercase transition-all duration-300 bg-[#f5f0e8] text-[#0f3d22] hover:bg-[#c8a951]/10 border border-[#c8a951]/15 cursor-pointer">
+            Orologi
+          </button>
+        </div>
+
+        <!-- Interactive visual responsive grids -->
+        <div id="gallery-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Populated dynamically via JS below -->
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         5. LIGHTBOX / FULL SCREEN MODAL INTERACTION
+         ========================================== -->
+    <div id="lightbox-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-[#0d0d0d]/95 backdrop-blur-md p-4 opacity-0 pointer-events-none transition-opacity duration-350" onclick="closeLightbox()">
+      
+      <!-- Inner modal window block -->
+      <div id="lightbox-content" class="relative w-full max-w-5xl bg-[#f5f0e8] text-[#0f3d22] border border-[#c8a951]/25 shadow-2xl overflow-hidden grid grid-cols-1 md:grid-cols-12 max-h-[90vh] md:max-h-auto overflow-y-auto" onclick="event.stopPropagation()">
+        
+        <!-- Close visual triggers -->
+        <button onclick="closeLightbox()" class="absolute top-4 right-4 z-30 p-2 bg-[#0d0d0d]/80 hover:bg-[#c8a951] text-[#c8a951] hover:text-[#0d0d0d] rounded-full transition-all duration-300 cursor-pointer" aria-label="Chiudi">
+          <i data-lucide="x" class="w-5 h-5"></i>
+        </button>
+
+        <!-- Previous navigation click -->
+        <button onclick="navigateLightbox(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-[#0d0d0d]/60 hover:bg-[#c8a951] text-[#c8a951] hover:text-[#0d0d0d] rounded-full transition-all duration-300 cursor-pointer hidden md:block" aria-label="Precedente">
+          <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Next navigation click -->
+        <button onclick="navigateLightbox(1)" class="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 bg-[#0d0d0d]/60 hover:bg-[#c8a951] text-[#c8a951] hover:text-[#0d0d0d] rounded-full transition-all duration-300 cursor-pointer hidden md:block" aria-label="Successivo">
+          <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <!-- Left column product picture viewport (6 cols) -->
+        <div class="md:col-span-6 relative bg-neutral-900 aspect-square md:aspect-auto md:min-h-[500px]" id="lightbox-image-box">
+          <!-- Image or SVG fallback loaded here -->
+        </div>
+
+        <!-- Right column description elements (6 cols) -->
+        <div class="md:col-span-6 p-8 md:p-12 flex flex-col justify-between text-left h-full">
+          <div class="space-y-6">
+            <div>
+              <span class="text-[10px] uppercase tracking-[0.25em] text-[#c8a951] font-bold block">
+                Resin-home Serena • Pezzo Unico Artigianale
+              </span>
+              <h3 id="lightbox-title" class="font-heading text-2xl md:text-3.5xl font-bold text-[#0f3d22] mt-1">
+                --
+              </h3>
+              <div class="w-12 h-[2.5px] bg-[#c8a951] mt-3" />
+            </div>
+
+            <div class="space-y-4">
+              <p id="lightbox-desc" class="font-body text-sm md:text-base text-[#0f3d22]/90 leading-relaxed font-light">
+                --
+              </p>
+
+              <!-- Dimension Specs Card -->
+              <div id="lightbox-dim-box" class="bg-[#faf8f4] border border-[#c8a951]/15 p-4 flex flex-col hidden">
+                <span class="text-[10px] uppercase tracking-wider text-[#5a5040] font-bold">DIMENSIONI / SPECIFICHE</span>
+                <span id="lightbox-dim" class="text-xs font-semibold text-[#1a6b3a] mt-0.5">--</span>
+              </div>
+
+              <!-- Key crafting features bullet metrics -->
+              <div>
+                <span class="text-[10px] uppercase tracking-wider text-[#5a5040] font-bold block mb-2">Dettagli di pregio:</span>
+                <ul id="lightbox-bullets" class="space-y-2">
+                  <!-- Injected via script -->
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prefilled direct Whatsapp redirect buttons -->
+          <div class="pt-8 border-t border-[#c8a951]/15 mt-8 flex flex-col space-y-3">
+            <a id="lightbox-buy-btn" href="#" target="_blank" rel="noopener noreferrer" class="w-full py-4 px-6 bg-[#1a6b3a] hover:bg-[#2d9e58] text-[#faf8f4] font-bold text-sm tracking-widest uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:scale-[1.01] cursor-pointer">
+              <i data-lucide="message-square" class="w-4.5 h-4.5"></i>
+              <span>Voglio questo!</span>
+            </a>
+            <span class="text-[10px] text-center text-[#5a5040] italic block">
+              Completamente personalizzabile nei colori e nelle inclusioni botaniche al momento del contatto.
+            </span>
+
+            <!-- Mobile pagination indicators -->
+            <div class="flex md:hidden justify-between items-center pt-3 border-t border-[#c8a951]/10 mt-1">
+              <button onclick="navigateLightbox(-1)" class="flex items-center text-xs text-[#1a6b3a] font-bold py-1.5 px-3 bg-[#c8a951]/15 tracking-wider uppercase">
+                ← Indietro
+              </button>
+              <button onclick="navigateLightbox(1)" class="flex items-center text-xs text-[#1a6b3a] font-bold py-1.5 px-3 bg-[#c8a951]/15 tracking-wider uppercase">
+                Avanti →
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+
+    <!-- ==========================================
+         6. PERSONALIZZA SECTION (SFONDO VERDE SCURO)
+         ========================================== -->
+    <section id="personalizza" class="relative py-24 bg-gradient-to-b from-[#0f3d22] to-[#0a2c18] text-[#faf8f4] scroll-mt-10 overflow-hidden select-none">
+      
+      <!-- Organic soft lighting decorations inside section background -->
+      <div class="absolute top-0 left-0 w-[300px] md:w-[500px] h-[300px] md:h-[500px] bg-[#c8a951]/5 rounded-full blur-[130px] pointer-events-none"></div>
+      <div class="absolute bottom-0 right-0 w-[240px] md:w-[450px] h-[240px] md:h-[450px] bg-[#2d9e58]/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10 text-center">
+        
+        <!-- Header titles -->
+        <div class="max-w-3xl mx-auto space-y-4 mb-20 reveal">
+          <span class="text-xs uppercase tracking-[0.35em] text-[#e8c97a] font-bold">
+            UNICI COME CHI LI RICEVE
+          </span>
+          <h2 class="font-heading text-3xl md:text-5xl text-[#faf8f4] font-medium leading-tight">
+            Ogni pezzo nasce dalla tua idea
+          </h2>
+          <p class="font-body text-base text-[#faf8f4]/80 leading-relaxed max-w-xl mx-auto font-light">
+            La bellezza del pezzo in resina sta nel poter decidere ogni particolare. Trasformiamo le tue passioni nel tuo prossimo pezzo d'arredamento o accessorio da custodire.
+          </p>
+          <div class="w-16 h-[2px] bg-[#c8a951] mx-auto mt-6" />
+        </div>
+
+        <!-- 3 Step Horizontal visual path -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-12 relative mb-20">
+          
+          <!-- Visual guide connector string -->
+          <div class="hidden lg:block absolute top-[100px] left-[15%] right-[15%] h-[1.5px] step-dotted-line -z-1"></div>
+
+          <!-- Step 1 -->
+          <div class="bg-[#0d0d0d]/35 backdrop-blur-sm border border-[#c8a951]/15 p-8 flex flex-col items-center hover:border-[#c8a951]/45 transition-all duration-350 relative group reveal">
+            <div class="absolute -top-6 bg-[#0d0d0d] border-2 border-[#c8a951] w-12 h-12 flex items-center justify-center rounded-full text-[#c8a951] font-bold font-heading text-lg gold-glow group-hover:bg-[#c8a951] group-hover:text-[#0d0d0d] transition-all duration-300">
+              1
+            </div>
+            <div class="mt-4 mb-5 p-3.5 bg-[#0f3d22] border border-[#c8a951]/10 rounded-full group-hover:scale-105 transition-transform duration-300 text-[#c8a951]">
+              <i data-lucide="sparkles" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-heading text-xl font-semibold text-[#e8c97a] mb-4">
+              Raccontami la tua idea
+            </h3>
+            <p class="font-body text-sm text-[#faf8f4]/85 leading-relaxed font-light">
+              Scrivimi o manda una foto di riferimento sul catalogo WhatsApp. Descrivi le combinazioni e le tonalità che sogni per la tua creazione.
+            </p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="bg-[#0d0d0d]/35 backdrop-blur-sm border border-[#c8a951]/15 p-8 flex flex-col items-center hover:border-[#c8a951]/45 transition-all duration-350 relative group reveal">
+            <div class="absolute -top-6 bg-[#0d0d0d] border-2 border-[#c8a951] w-12 h-12 flex items-center justify-center rounded-full text-[#c8a951] font-bold font-heading text-lg gold-glow group-hover:bg-[#c8a951] group-hover:text-[#0d0d0d] transition-all duration-300">
+              2
+            </div>
+            <div class="mt-4 mb-5 p-3.5 bg-[#0f3d22] border border-[#c8a951]/10 rounded-full group-hover:scale-105 transition-transform duration-300 text-[#c8a951]">
+              <i data-lucide="palette" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-heading text-xl font-semibold text-[#e8c97a] mb-4">
+              Scelgo colori e forme
+            </h3>
+            <p class="font-body text-sm text-[#faf8f4]/85 leading-relaxed font-light">
+              Lavoro accuratamente sul tuo pezzo, mixando pigmenti brillanti e inclusioni (come piante o oro) fino ad ottenere la composizione perfetta.
+            </p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="bg-[#0d0d0d]/35 backdrop-blur-sm border border-[#c8a951]/15 p-8 flex flex-col items-center hover:border-[#c8a951]/45 transition-all duration-350 relative group reveal">
+            <div class="absolute -top-6 bg-[#0d0d0d] border-2 border-[#c8a951] w-12 h-12 flex items-center justify-center rounded-full text-[#c8a951] font-bold font-heading text-lg gold-glow group-hover:bg-[#c8a951] group-hover:text-[#0d0d0d] transition-all duration-300">
+              3
+            </div>
+            <div class="mt-4 mb-5 p-3.5 bg-[#0f3d22] border border-[#c8a951]/10 rounded-full group-hover:scale-105 transition-transform duration-300 text-[#c8a951]">
+              <i data-lucide="gift" class="w-6 h-6"></i>
+            </div>
+            <h3 class="font-heading text-xl font-semibold text-[#e8c97a] mb-4">
+              Ricevi il tuo pezzo unico
+            </h3>
+            <p class="font-body text-sm text-[#faf8f4]/85 leading-relaxed font-light">
+              Spedito comodamente e in totale sicurezza in tutta Italia, direttamente a casa tua o confezionato come regalo pronto da dedicare.
+            </p>
+          </div>
+
+        </div>
+
+        <!-- Big custom request callout card -->
+        <div class="bg-[#0d0d0d]/45 border border-[#c8a951]/25 p-8 md:p-12 max-w-4xl mx-auto rounded-none text-center select-none reveal">
+          <h3 class="font-heading text-2xl md:text-3xl text-[#c8a951] italic font-normal mb-3 text-glow-gold">
+            Vuoi fare un regalo speciale o inserire un nome?
+          </h3>
+          <p class="font-body text-sm md:text-base text-[#faf8f4]/85 max-w-2xl mx-auto leading-relaxed mb-8 font-light">
+            Dalle iniziali botanical fiorite fino agli orologi monumentali coordinati con il divano, realizzo ordini personalizzati per cerimonie, bomboniere ed elementi di arredo domestico unici.
+          </p>
+          
+          <a href="https://wa.me/393202348856?text=Ciao%20Serena!%20Vorrei%20personalizzare%20una%20tua%20creazione%20in%20resina!" target="_blank" rel="noopener noreferrer" class="inline-flex w-full sm:w-auto px-8 py-4 bg-[#c8a951] hover:bg-[#e8c97a] text-[#0d0d0d] font-bold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-[1.03] gold-glow-hover items-center justify-center space-x-2">
+            <i data-lucide="whatsapp" class="w-5 h-5"></i>
+            <span>Inizia su WhatsApp</span>
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         7. MERCATINI ED EVENTI (CHIARO - FONDO CREMA)
+         ========================================== -->
+    <section id="mercatini" class="relative py-24 bg-[#f5f0e8] text-[#0f3d22] scroll-mt-10 overflow-hidden">
+      
+      <!-- Radial green and gold background lights -->
+      <div class="absolute top-1/2 left-0 -translate-y-1/2 w-[200px] md:w-[350px] h-[200px] md:h-[350px] bg-[#c8a951]/5 rounded-full blur-[70px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+        
+        <!-- Header title -->
+        <div class="text-center space-y-3 mb-16 reveal">
+          <span class="text-xs uppercase tracking-[0.3em] text-[#c8a951] font-bold">
+            ARTIGIANATO LOCALE DAL VIVO
+          </span>
+          <h2 class="font-heading text-3xl md:text-5xl text-[#0f3d22] font-semibold">
+            Dove Trovarmi
+          </h2>
+          <div class="w-16 h-[2px] bg-[#c8a951] mx-auto mt-4" />
+        </div>
+
+        <!-- Descriptive layout card splits info & link paths -->
+        <div class="max-w-4xl mx-auto bg-[#faf8f4] border border-[#c8a951]/15 p-8 md:p-12 shadow-sm hover:border-[#c8a951]/35 transition-all duration-300 reveal text-left">
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            
+            <!-- Left Info column details (8 cols) -->
+            <div class="md:col-span-8 space-y-6">
+              <div class="inline-flex items-center space-x-2 bg-[#1a6b3a]/10 text-[#1a6b3a] px-3.5 py-1.5 text-xs font-bold tracking-wider uppercase">
+                <i data-lucide="map-pin" class="w-3.5 h-3.5"></i>
+                <span>Torino • Grosso Canavese</span>
+              </div>
+
+              <h3 class="font-heading text-2xl md:text-3.5xl font-normal text-[#0f3d22] italic leading-tight">
+                Mercatini ed Eventi Locali
+              </h3>
+
+              <p class="font-body text-[#5a5040] text-sm md:text-base leading-relaxed font-light">
+                Partecipo regolarmente a fiere dell'handmade e mercatini di artigianato artistico nella provincia di Torino e in Canavese. Vedere i colori riflettere i raggi del sole dal vivo e valutare le sfumature in controluce è un'esperienza indimenticabile e bellissima!
+              </p>
+
+              <!-- Helpful notice box -->
+              <div class="bg-[#f5f0e8] border border-[#c8a951]/20 p-4 flex items-start space-x-3.5">
+                <i data-lucide="calendar" class="text-[#c8a951] shrink-0 mt-0.5 w-5 h-5"></i>
+                <div class="font-body text-xs text-[#0f3d22]/90 leading-normal">
+                  <strong class="block text-[#0f3d22] font-bold mb-0.5 font-heading text-sm">Qual è la mia prossima data?</strong>
+                  Seguimi sulle storie di Instagram! Vi pubblico sformature in tempo reale, novità in lavorazione e il calendario degli eventi locali canavesani.
+                </div>
+              </div>
+            </div>
+
+            <!-- Right quick communication redirection triggers (4 cols) -->
+            <div class="md:col-span-4 flex flex-col space-y-4">
+              <a href="https://instagram.com/resin_home_serena" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-6 bg-[#0d0d0d] hover:bg-[#c8a951] text-[#c8a951] hover:text-[#0d0d0d] font-bold text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center space-x-2 text-center shadow-sm">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+                <span>Seguimi su Instagram</span>
+              </a>
+
+              <a href="https://wa.me/393202348856?text=Ciao%20Serena!%20Ho%20visto%20il%20sito%20e%20volevo%20sapere%20in%20quali%20prossimi%20mercatini%20posso%20trovarti!" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 px-6 border border-[#c8a951] hover:bg-[#c8a951]/10 text-[#0f3d22] font-semibold text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center space-x-2 text-center">
+                <i data-lucide="message-square" class="w-4 h-4"></i>
+                <span>Chiedi su WhatsApp</span>
+              </a>
+
+              <span class="text-[10px] text-center text-[#5a5040] block italic mt-1 font-light">
+                Disponibili spedizioni rapide in tutta Italia.
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         8. CONTATTI SECTION (CHIARO - FONDO OFFWHITE)
+         ========================================== -->
+    <section id="contatti" class="relative py-24 bg-[#faf8f4] text-[#0f3d22] scroll-mt-10 overflow-hidden">
+      
+      <!-- Green color splash bottom decorator aura -->
+      <div class="absolute bottom-0 right-0 w-[240px] md:w-[350px] h-[240px] md:h-[350px] bg-[#1a6b3a]/5 rounded-full blur-[90px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+        
+        <!-- Header -->
+        <div class="text-center space-y-3 mb-16 reveal">
+          <span class="text-xs uppercase tracking-[0.3em] text-[#c8a951] font-bold">
+            PROGETTA SUBITO CON ME
+          </span>
+          <h2 class="font-heading text-3xl md:text-5xl text-[#0f3d22] font-semibold">
+            Parliamo del Tuo Pezzo in Resina
+          </h2>
+          <div class="w-16 h-[2px] bg-[#c8a951] mx-auto mt-4" />
+        </div>
+
+        <!-- split: cards + submission form -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 max-w-5xl mx-auto items-stretch">
+          
+          <!-- Detailed Cards info (5 cols) -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-6 reveal">
+            
+            <!-- Quick assistance card text -->
+            <div class="bg-[#f5f0e8] border border-[#c8a951]/15 p-8 flex flex-col justify-center text-left h-full">
+              <h3 class="font-heading text-xl font-bold text-[#0f3d22] mb-4">
+                Siamo Qui per Te
+              </h3>
+              <p class="font-body text-xs md:text-sm text-[#5a5040] leading-relaxed mb-6 font-light">
+                Per qualsiasi domanda sulle mie creazioni o per pianificare un'opera d'arte personalizzata, scrivimi direttamente! Sfoglieremo sottomisure e campionari colore assieme per trovare la soluzione ideale.
+              </p>
+              
+              <div class="flex items-center space-x-2.5 text-[#1a6b3a] bg-[#1a6b3a]/10 px-4 py-3 border border-[#1a6b3a]/25 self-start">
+                <i data-lucide="clock" class="w-4 h-4 shrink-0"></i>
+                <span class="text-xs font-semibold uppercase tracking-wider">
+                  Rispondo entro 24 ore
+                </span>
+              </div>
+            </div>
+
+            <!-- Direct phone box mapping link -->
+            <a href="https://wa.me/393202348856" target="_blank" rel="noopener noreferrer" class="bg-[#faf8f4] border border-[#c8a951]/15 p-6 flex items-center space-x-4 hover:border-[#1a6b3a] hover:shadow-sm transition-all duration-300 text-left group">
+              <div class="p-3 bg-[#e8f7ee] text-[#1a6b3a] rounded-full group-hover:scale-105 transition-transform duration-300 shadow-sm">
+                <i data-lucide="message-square" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-[#5a5040]">WhatsApp</span>
+                <p class="font-heading text-lg font-bold text-[#0f3d22] mt-0.5 group-hover:text-[#1a6b3a] transition-colors duration-300">
+                  +39 320 234 8856
+                </p>
+              </div>
+            </a>
+
+            <!-- Direct Instagram target mapping link -->
+            <a href="https://instagram.com/resin_home_serena" target="_blank" rel="noopener noreferrer" class="bg-[#faf8f4] border border-[#c8a951]/15 p-6 flex items-center space-x-4 hover:border-[#c8a951] hover:shadow-sm transition-all duration-300 text-left group">
+              <div class="p-3 bg-[#c8a951]/10 text-[#c8a951] rounded-full group-hover:scale-105 transition-transform duration-300 shadow-sm">
+                <i data-lucide="instagram" class="w-6 h-6"></i>
+              </div>
+              <div>
+                <span class="text-[10px] uppercase font-bold tracking-widest text-[#5a5040]">Instagram</span>
+                <p class="font-heading text-lg font-bold text-[#0f3d22] mt-0.5 group-hover:text-[#c8a951] transition-colors duration-300">
+                  @resin_home_serena
+                </p>
+              </div>
+            </a>
+
+          </div>
+
+          <!-- JavaScript WhatsApp integrated validation Form (7 cols) -->
+          <div class="lg:col-span-7 bg-[#faf8f4] border border-[#c8a951]/15 p-8 md:p-10 shadow-md reveal text-left">
+            <h3 class="font-heading text-2xl font-normal text-[#0f3d22] italic mb-6">
+              Scrivimi Subito
+            </h3>
+
+            <!-- Redirection layout warning on error -->
+            <div id="form-error-block" class="mb-6 p-4 bg-red-50 border-l-4 border-red-500 text-red-700 text-xs flex items-center space-x-2 hidden">
+              <i data-lucide="alert-circle" class="w-4 h-4 shrink-0"></i>
+              <span id="form-error-msg" class="font-medium">--</span>
+            </div>
+
+            <form id="whatsapp-contact-form" onsubmit="handleContactSubmit(event)" class="space-y-6">
+              
+              <!-- Nome Input -->
+              <div class="space-y-1.5">
+                <label for="contact-name" class="text-[10px] uppercase tracking-wider font-bold text-[#0f3d22]/85 block">
+                  Il tuo Nome *
+                </label>
+                <input
+                  type="text"
+                  id="contact-name"
+                  placeholder="Es. Marco"
+                  class="w-full bg-[#f5f0e8] border border-[#c8a951]/25 focus:border-[#1a6b3a] rounded-none p-3.5 text-sm text-[#0f3d22] focus:outline-none transition-colors duration-300 font-sans-lato"
+                  required
+                />
+              </div>
+
+              <!-- Messaggio Input -->
+              <div class="space-y-1.5">
+                <label for="contact-msg" class="text-[10px] uppercase tracking-wider font-bold text-[#0f3d22]/85 block">
+                  Cosa vorresti realizzare? *
+                </label>
+                <textarea
+                  id="contact-msg"
+                  rows="5"
+                  placeholder="Descrivi la tua idea, i colori desiderati o le personalizzazioni che immagini..."
+                  class="w-full bg-[#f5f0e8] border border-[#c8a951]/25 focus:border-[#1a6b3a] rounded-none p-3.5 text-sm text-[#0f3d22] focus:outline-none transition-colors duration-300 font-sans-lato resize-y"
+                  required
+                ></textarea>
+              </div>
+
+              <!-- Explanation redirect guidelines block -->
+              <div class="flex items-center space-x-2.5 bg-[#c8a951]/5 p-3.5 border border-[#c8a951]/10">
+                <i data-lucide="sparkles" class="text-[#c8a951] shrink-0 w-4 h-4"></i>
+                <p class="text-[11px] font-body text-[#5a5040] leading-normal font-medium">
+                  Cliccando, si aprirà direttamente WhatsApp con il messaggio precompilato pronto per essere inoltrato a Serena.
+                </p>
+              </div>
+
+              <!-- Submit button trigger -->
+              <button
+                type="submit"
+                class="w-full py-4 bg-[#1a6b3a] hover:bg-[#2d9e58] text-[#faf8f4] font-bold text-xs tracking-widest uppercase transition-all duration-300 flex items-center justify-center space-x-2 shadow-md hover:scale-[1.01] cursor-pointer"
+              >
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+                <span>Invia su WhatsApp</span>
+              </button>
+            </form>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- ==========================================
+         9. FOOTER SECTION
+         ========================================== -->
+    <footer class="relative bg-[#0d0d0d] text-[#faf8f4] pt-16 pb-8 border-t border-[#c8a951]/15 select-none overflow-hidden">
+      
+      <!-- Subtle glow lights in the footer corner -->
+      <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[350px] h-[350px] bg-[#c8a951]/5 rounded-full blur-[80px] pointer-events-none"></div>
+
+      <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-10 items-center border-b border-[#c8a951]/10 pb-12 mb-8">
+          
+          <!-- Logo & tagline block (5 cols) -->
+          <div class="md:col-span-5 space-y-4 text-center md:text-left">
+            <h3 class="font-logo text-3xl text-[#c8a951] italic leading-none">
+              Resin-home Serena
+            </h3>
+            <p class="text-[11px] font-sans-lato uppercase tracking-[0.2em] -mt-1.5 text-[#e8c97a]/70">
+              Creazioni Artigianali
+            </p>
+            <p class="font-body text-xs text-[#faf8f4]/60 max-w-sm mx-auto md:mx-0 leading-relaxed font-light">
+              Progetto e creo a mano creazioni uniche e personalizzate in resina epossidica, fondendo petali fioriti, venature dorate di ispirazione malachite e memorie felici.
+            </p>
+          </div>
+
+          <!-- Social link and place targets (4 cols) -->
+          <div class="md:col-span-4 flex flex-col items-center md:items-start space-y-4">
+            <h4 class="font-heading text-sm text-[#c8a951] font-bold tracking-wider uppercase">
+              Rimani in Contatto
+            </h4>
+            <div class="flex items-center space-x-4">
+              <a href="https://instagram.com/resin_home_serena" target="_blank" rel="noopener noreferrer" class="p-3 bg-[#c8a951]/5 border border-[#c8a951]/15 text-[#c8a951] hover:text-[#e8c97a] hover:bg-[#c8a951]/15 transition-all duration-300 rounded-full" aria-label="Instagram">
+                <i data-lucide="instagram" class="w-4 h-4"></i>
+              </a>
+              <a href="https://wa.me/393202348856" target="_blank" rel="noopener noreferrer" class="p-3 bg-[#c8a951]/5 border border-[#c8a951]/15 text-[#c8a951] hover:text-[#e8c97a] hover:bg-[#c8a951]/15 transition-all duration-300 rounded-full" aria-label="WhatsApp">
+                <i data-lucide="message-circle" class="w-4 h-4"></i>
+              </a>
+            </div>
+            <p class="font-body text-[10px] text-[#faf8f4]/50 leading-normal font-light">
+              Laboratorio in Grosso Canavese (TO). Spedizioni assicurate.
+            </p>
+          </div>
+
+          <!-- Fast scroll design CTA (3 cols) -->
+          <div class="md:col-span-3 flex justify-center md:justify-end">
+            <a href="#hero" class="px-5 py-3 border border-[#c8a951]/30 hover:border-[#c8a951] text-[#e8c97a] hover:text-[#faf8f4] text-xs font-semibold tracking-widest uppercase transition-all duration-300 flex items-center space-x-2">
+              <span>Torna Su</span>
+              <i data-lucide="arrow-up" class="w-3.5 h-3.5"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Lower copyright alignments -->
+        <div class="flex flex-col md:flex-row items-center justify-between font-body text-[11px] text-[#faf8f4]/45 space-y-4 md:space-y-0 text-center">
+          <div>
+            <p>© <span id="copyright-year">2026</span> Resin-home Serena. Tutti i diritti riservati.</p>
+            <p class="mt-1 text-[#e8c97a]/60 font-medium italic text-xs tracking-wider">
+              Creazioni artigianali in resina — Grosso Canavese, Torino
+            </p>
+          </div>
+          <div class="flex items-center space-x-1.5 font-light">
+            <span>Fatto a mano con cura a pochi passi da Torino</span>
+          </div>
+        </div>
+
+      </div>
+    </footer>
+
+
+    <!-- ==========================================
+         10. STICKY FLOATING WHATSAPP BUTTON (PULSING WIDGET)
+         ========================================== -->
+    <a
+      href="https://wa.me/393202348856?text=Ciao%20Serena!%20Ho%20visto%20il%20sito%20e%20vorrei%20sapere%20di%20più%20sulle%20tue%20creazioni%20e%2520personalizzazioni%20in%20resina!"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Contatta Serena su WhatsApp"
+      class="whatsapp-pulse fixed bottom-6 right-6 z-45 bg-[#25d366] hover:bg-[#20ba59] text-[#faf8f4] p-4 rounded-full shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center group"
+    >
+      <i data-lucide="message-circle" class="w-6 h-6 fill-white text-[#25d366] group-hover:rotate-12 transition-transform duration-300"></i>
+      
+      <!-- Hover indicator pill label -->
+      <span class="absolute right-14 bg-[#0d0d0d]/90 text-[#c8a951] text-[10px] uppercase tracking-widest px-3 py-1.5 border border-[#c8a951]/20 scale-0 group-hover:scale-100 transition-transform duration-300 origin-right whitespace-nowrap font-sans-lato font-bold">
+        Parla con Serena!
+      </span>
+    </a>
+
+
+    <!-- ==================================================================
+         VANILLA JAVASCRIPT: PRODUCTS DATA, FILTERS, LIGHTBOX & SPARKLES
+         ================================================================== -->
+    <script>
+      // --- Products Data Array ---
+      const PRODUCTS_SOURCE = [
+        {
+          id: "g1",
+          name: "Collana Smeraldo e Oro",
+          category: "Gioielli",
+          description: "Collana in resina trasparente con glitter oro e pigmenti verde smeraldo.",
+          longDescription: "Un ciondolo dalle sfumature profonde che cattura la luce ad ogni movimento. Realizzata con resina ad alta trasparenza con inclusioni fluttuanti di vera foglia d'oro e pigmento liquido verde smeraldo.",
+          image: "./foto/prodotto1.jpg",
+          dimensions: "Ciondolo: 3x3 cm, Catenina dorata: 45 cm",
+          details: ["Inclusioni in foglia d'oro 24k", "Resina atossica anti-ingiallimento", "Componenti anallergiche senza nichel"]
+        },
+        {
+          id: "g2",
+          name: "Orecchini Pendenti Malachite",
+          category: "Gioielli",
+          description: "Orecchini artigianali in resina con sfumature malachite e pigmento perlato.",
+          longDescription: "Orecchini leggeri ed elegantissimi che ricreano le striature ipnotiche della malachite naturale. Ogni pezzo viene colato a più strati per garantire profondità tridimensionale.",
+          image: "./foto/prodotto2.jpg",
+          dimensions: "Lunghezza: 5.5 cm compreso l'amo",
+          details: ["Effetto marmo verde malachite", "Perni a cerchio in acciaio inossidabile", "Super leggeri e confortevoli"]
+        },
+        {
+          id: "h1",
+          name: "Vassoio Onde Marine",
+          category: "Home Decor",
+          description: "Elegante vassoio in pregiato legno e resina epossidica con effetto onde spumose.",
+          longDescription: "Un salto nell'oceano direttamente nella tua zona giorno. La resina epossidica ricrea realisticamente le onde del mare e la schiuma marina che si infrange sul legno caldo d'appoggio.",
+          image: "./foto/prodotto3.jpg",
+          dimensions: "35 x 25 x 4 cm",
+          details: ["Base in legno di bambù trattato", "Onde in resina multistrato 3D", "Finitura antigraffio certificata per alimenti"]
+        },
+        {
+          id: "h2",
+          name: "Sottobicchieri Geode Dorati",
+          category: "Home Decor",
+          description: "Set di 4 sottobicchieri in resina trasparente coordinata e bordi decorati in foglia d'oro.",
+          longDescription: "Ispirati alle sezioni di geode naturali, questi favolosi sottobicchieri proteggono i tuoi mobili aggiungendo un accento luxury alla tavola. Rifiniti a mano con vernice acrilica metallica dorata sui bordi.",
+          image: "./foto/prodotto4.jpg",
+          dimensions: "Diametro circa 10 cm ciascuno",
+          details: ["Set coordinato da 4 pezzi", "Bordo in foglia oro dipinto a mano", "Piedini trasparenti antiscivolo in gomma inclusi"]
+        },
+        {
+          id: "a1",
+          name: "Portachiavi Lettera Personalizzato",
+          category: "Accessori",
+          description: "Iniziale a tua scelta con fiori secchi veri pressati e brillanti foglie dorate.",
+          longDescription: "Il regalo personalizzato per eccellenza. Puoi scegliere un'iniziale dell'alfabeto custodita in una resina cristallina che protegge per sempre piccoli boccioli botanici naturali ed elementi dorati.",
+          image: "./foto/prodotto5.jpg",
+          dimensions: "Altezza lettera: 4 cm, Spessore: 1 cm",
+          details: ["A scelta qualsiasi lettera A-Z", "Fiori naturali disidratati", "Anello e moschettone dorato ultra-resistente"]
+        },
+        {
+          id: "a2",
+          name: "Segnalibro Foglia d'Oro",
+          category: "Accessori",
+          description: "Segnalibro in resina fluida ultra-lucida con inserti dorati e nappa sfarzosa in seta.",
+          longDescription: "Un accessorio indispensabile per gli amanti della lettura. Sottilissimo ma infrangibile, è arricchito da eleganti scaglie dorate e completato da una bellissima nappa in tessuto coordinato.",
+          image: "./foto/prodotto6.jpg",
+          dimensions: "14 x 2.5 cm, spessore 1.5 mm",
+          details: ["Resina specchiata lucidissima", "Nappa morbida inclusa", "Infrangibile e flessibile"]
+        },
+        {
+          id: "o1",
+          name: "Orologio da Parete Agata",
+          category: "Orologi",
+          description: "Colata di resina artistica effetto pietra agata su base legno, dettagli oro e lancette minimali.",
+          longDescription: "Un orologio d'autore che unisce arte e funzionalità. La colata richiama la preziosa pietra agata naturale con venature dorate lucenti, numeri discreti dipinti ed un meccanismo completamente silenzioso.",
+          image: "./foto/prodotto7.jpg",
+          dimensions: "Diametro: 30 cm",
+          details: ["Quadrante silenzioso a scorrimento continuo (senza ticchettio)", "Aggancio per parete rinforzato sul retro", "Texture 3D in rilievo lucida e satinata"]
+        },
+        {
+          id: "o2",
+          name: "Orologio Cosmico Smeraldo",
+          category: "Orologi",
+          description: "Orologio artistico da parete in verde smeraldo profondo con brillanti striature dorate.",
+          longDescription: "Un'opera scultorea ipnotica. Sfumature dal verde oliva scuro al verde smeraldo medio si mescolano a scie dorate vibranti, creando un effetto cosmico che decora qualsiasi parete con estrema eleganza.",
+          image: "./foto/prodotto8.jpg",
+          dimensions: "Diametro: 40 cm",
+          details: ["Orologio in resina su legno multistrato", "Incisioni metalliche dorate per le ore", "Funziona con 1 batteria AA (non inclusa)"]
+        }
+      ];
+
+      // Current active selection details tracker
+      let currentFilteredList = [...PRODUCTS_SOURCE];
+      let lightboxIndex = 0;
+
+      // Initialize Page
+      document.addEventListener("DOMContentLoaded", () => {
+        // Render initial product gallery items
+        renderProducts(PRODUCTS_SOURCE);
+
+        // Update footer copyright year dynamically
+        document.getElementById("copyright-year").textContent = new Date().getFullYear();
+
+        // Launch gold sparkling particle engine
+        launchGoldDust();
+
+        // Boot Lucide Icons CDN rendering
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+
+        // Set up scroll triggers for parallax and transitions
+        setupScrollReveal();
+
+        // Bind scroll updates for sticky glass dynamic behavior
+        window.addEventListener("scroll", handleStickyNavbar);
+
+        // Bind mobile hamburger toggles
+        const menuBtn = document.getElementById("mobile-menu-btn");
+        const overlay = document.getElementById("mobile-menu-overlay");
+        
+        menuBtn.addEventListener("click", () => {
+          overlay.classList.toggle("opacity-0");
+          overlay.classList.toggle("pointer-events-none");
+          const isOpened = !overlay.classList.contains("opacity-0");
+          
+          // Toggle scrolling locks
+          document.body.style.overflow = isOpened ? "hidden" : "";
+          
+          // Visual cross and close swapping inside menu hamburger
+          const menuIcon = document.getElementById("menu-icon");
+          if (isOpened) {
+            menuIcon.setAttribute("data-lucide", "x");
+          } else {
+            menuIcon.setAttribute("data-lucide", "menu");
+          }
+          if (window.lucide) {
+            window.lucide.createIcons();
+          }
+        });
+
+        // Close mobile menu automatic on link click
+        document.querySelectorAll(".mobile-nav-link").forEach(link => {
+          link.addEventListener("click", () => {
+            overlay.classList.add("opacity-0");
+            overlay.classList.add("pointer-events-none");
+            document.body.style.overflow = "";
+            const menuIcon = document.getElementById("menu-icon");
+            menuIcon.setAttribute("data-lucide", "menu");
+            if (window.lucide) {
+              window.lucide.createIcons();
+            }
+          });
+        });
+
+        // Set up manual scroll wheel link binding
+        document.getElementById("scroll-wheel").addEventListener("click", () => {
+          document.getElementById("galleria").scrollIntoView({ behavior: "smooth" });
+        });
+
+        // Bind central document escape binds to safely close active modals
+        window.addEventListener("keydown", (e) => {
+          const lmb = document.getElementById("lightbox-modal");
+          if (e.key === "Escape" && !lmb.classList.contains("opacity-0")) {
+            closeLightbox();
+          } else if (e.key === "ArrowLeft" && !lmb.classList.contains("opacity-0")) {
+            navigateLightbox(-1);
+          } else if (e.key === "ArrowRight" && !lmb.classList.contains("opacity-0")) {
+            navigateLightbox(1);
+          }
+        });
+      });
+
+      // Sticky transparent header action
+      function handleStickyNavbar() {
+        const nav = document.getElementById("navbar");
+        if (window.scrollY > 24) {
+          nav.classList.add("glass-nav", "py-3");
+          nav.classList.remove("bg-transparent", "py-5");
+        } else {
+          nav.classList.remove("glass-nav", "py-3");
+          nav.classList.add("bg-transparent", "py-5");
+        }
+      }
+
+      // Parallax fade reveals
+      function setupScrollReveal() {
+        const revealOptions = {
+          root: null,
+          rootMargin: "0px -10% -10px 0px",
+          threshold: 0.05
+        };
+
+        const handleRevealEntries = (entries, observer) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active");
+            }
+          });
+        };
+
+        const rObserver = new IntersectionObserver(handleRevealEntries, revealOptions);
+        document.querySelectorAll(".reveal").forEach(el => rObserver.observe(el));
+      }
+
+      // Floating gold-star particles generator
+      function launchGoldDust() {
+        const container = document.getElementById("sparkle-container");
+        if (!container) return;
+        
+        const count = 28;
+        for (let i = 0; i < count; i++) {
+          const sparkle = document.createElement("div");
+          sparkle.classList.add("particle-sparkle", "absolute", "rounded-full", "bg-gradient-to-tr", "from-[#c8a951]", "to-[#e8c97a]");
+          
+          sparkle.style.left = `${Math.random() * 100}%`;
+          sparkle.style.bottom = "-10px";
+          const size = `${Math.random() * 3 + 2}px`;
+          sparkle.style.width = size;
+          sparkle.style.height = size;
+          sparkle.style.animationDelay = `${Math.random() * -12}s`;
+          sparkle.style.animationDuration = `${Math.random() * 8 + 6}s`;
+          sparkle.style.boxShadow = "0 0 6px rgba(232, 201, 122, 0.8)";
+          
+          container.appendChild(sparkle);
+        }
+      }
+
+      // Fallback Profile image rendering using SVGs
+      function handleProfileImageFallback(imgElement) {
+        imgElement.style.display = 'none';
+        const parent = imgElement.parentElement;
+        parent.innerHTML = `
+          <svg class="w-full h-full text-[#c8a951]" viewBox="0 0 320 420" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="100%" height="100%" fill="#0f3d22" />
+            <circle cx="160" cy="180" r="110" stroke="#c8a951" stroke-width="2" opacity="0.3" />
+            <circle cx="160" cy="180" r="80" stroke="#c8a951" stroke-width="1.5" opacity="0.25" />
+            <path d="M160 110 C185 110, 205 130, 205 155 C205 180, 185 200, 160 200 C135 200, 115 180, 115 155 C115 130, 135 110, 160 110 Z" fill="#c8a951" opacity="0.4" />
+            <path d="M160 215 C110 215, 75 250, 75 300 L245 300 C245 250, 210 215, 160 215 Z" fill="#c8a951" opacity="0.4" />
+            <path d="M110 320 Q 160 280, 210 330" stroke="#e8c97a" stroke-width="2.5" />
+            <text x="50%" y="360" dominant-baseline="middle" text-anchor="middle" fill="#f5f0e8" font-family="'Playfair Display', serif" font-style="italic" font-size="20">Serena</text>
+            <text x="50%" y="388" dominant-baseline="middle" text-anchor="middle" fill="#c8a951" font-family="'Lato', sans-serif" letter-spacing="4" font-size="10" font-weight="bold">RESIN ARTIST</text>
+          </svg>
+        `;
+      }
+
+      // Category filter visual vectors
+      function getSvgFallbackForCategory(cat) {
+        if (cat === 'Gioielli') {
+          return `
+            <svg class="w-full h-full text-[#c8a951] relative z-0" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="emGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0f3d22" />
+                  <stop offset="60%" stop-color="#1a6b3a" />
+                  <stop offset="100%" stop-color="#2d9e58" />
+                </linearGradient>
+                <linearGradient id="auGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#c8a951" />
+                  <stop offset="50%" stop-color="#faf8f4" />
+                  <stop offset="100%" stop-color="#e8c97a" />
+                </linearGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#emGrad)" />
+              <path d="M-10 150 C 40 120, 80 180, 130 140 C 180 100, 150 40, 210 20" stroke="#c8a951" stroke-width="2" stroke-linecap="round" opacity="0.6" />
+              <g transform="translate(100, 100)" class="gold-glow">
+                <line x1="0" y1="-100" x2="0" y2="-40" stroke="url(#auGrad)" stroke-width="3" />
+                <circle cx="0" cy="-40" r="6" fill="none" stroke="url(#auGrad)" stroke-width="2" />
+                <path d="M 0 -30 L 25 10 L 0 50 L -25 10 Z" fill="url(#emGrad)" stroke="url(#auGrad)" stroke-width="3" />
+                <circle cx="-5" cy="15" r="4" fill="url(#auGrad)" />
+                <circle cx="8" cy="-5" r="3" fill="#faf8f4" opacity="0.8" />
+              </g>
+            </svg>
+          `;
+        } else if (cat === 'Home Decor') {
+          return `
+            <svg class="w-full h-full relative z-0" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="seaG" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0a2c18" />
+                  <stop offset="35%" stop-color="#12502b" />
+                  <stop offset="70%" stop-color="#22854b" />
+                  <stop offset="100%" stop-color="#4ad485" />
+                </linearGradient>
+                <linearGradient id="sandG" x1="0%" y1="100%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#c8a951" />
+                  <stop offset="100%" stop-color="#e8c97a" />
+                </linearGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#seaG)" />
+              <path d="M0 60 C50 30, 80 120, 200 20" stroke="#e8c97a" stroke-width="2" opacity="0.75" />
+              <path d="M0 120 C70 160, 120 70, 200 130" stroke="#faf8f4" stroke-width="1.5" opacity="0.5" />
+              <circle cx="150" cy="50" r="5" fill="#e8c97a" />
+              <circle cx="40" cy="140" r="3" fill="#e8c97a" />
+            </svg>
+          `;
+        } else if (cat === 'Accessori') {
+          return `
+            <svg class="w-full h-full relative z-0" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="acG" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#0d0d0d" />
+                  <stop offset="50%" stop-color="#12502b" />
+                  <stop offset="100%" stop-color="#1a6b3a" />
+                </linearGradient>
+                <linearGradient id="goG" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#c8a951" />
+                  <stop offset="50%" stop-color="#faf8f4" />
+                  <stop offset="100%" stop-color="#e8c97a" />
+                </linearGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#acG)" />
+              <g transform="translate(100, 100)" class="gold-glow">
+                <rect x="-25" y="-60" width="50" height="120" rx="8" fill="#1a6b3a" stroke="url(#goG)" stroke-width="2" opacity="0.9" />
+                <circle cx="0" cy="-68" r="4" fill="url(#goG)" />
+                <path d="M 0 -64 L 0 -85 C -15 -90, -10 -105, 0 -100" stroke="url(#goG)" stroke-width="1.5" />
+                <path d="M -10 30 Q 0 0 -5 -30" stroke="url(#goG)" stroke-width="2.5" fill="none" />
+              </g>
+            </svg>
+          `;
+        } else { // Orologi
+          return `
+            <svg class="w-full h-full relative z-0" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <radialGradient id="clBg" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#1a6b3a" />
+                  <stop offset="60%" stop-color="#0f3d22" />
+                  <stop offset="100%" stop-color="#0d0d0d" />
+                </radialGradient>
+                <linearGradient id="auH" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#e8c97a" />
+                  <stop offset="100%" stop-color="#c8a951" />
+                </linearGradient>
+              </defs>
+              <rect width="100%" height="100%" fill="#0d0d0d" />
+              <circle cx="100" cy="100" r="85" stroke="url(#auH)" stroke-width="2" />
+              <circle cx="100" cy="100" r="82" fill="url(#clBg)" />
+              <line x1="100" y1="24" x2="100" y2="30" stroke="url(#auH)" stroke-width="2.5" />
+              <line x1="100" y1="170" x2="100" y2="176" stroke="url(#auH)" stroke-width="2.5" />
+              <line x1="24" y1="100" x2="30" y2="100" stroke="url(#auH)" stroke-width="2.5" />
+              <line x1="170" y1="100" x2="176" y2="100" stroke="url(#auH)" stroke-width="2.5" />
+              <circle cx="100" cy="100" r="3" fill="url(#auH)" />
+              <line x1="100" y1="100" x2="100" y2="70" stroke="url(#auH)" stroke-width="2" stroke-linecap="round" />
+              <line x1="100" y1="100" x2="135" y2="100" stroke="url(#auH)" stroke-width="1.5" stroke-linecap="round" />
+            </svg>
+          `;
+        }
+      }
+
+      // Render product cards inside grid
+      function renderProducts(list) {
+        const grid = document.getElementById("gallery-grid");
+        grid.innerHTML = "";
+
+        if (list.length === 0) {
+          grid.innerHTML = `
+            <div class="col-span-full py-12 text-center text-sm italic text-[#5a5040]">
+              Nessun prodotto disponibile in questa categoria.
+            </div>
+          `;
+          return;
+        }
+
+        list.forEach((p, index) => {
+          const card = document.createElement("div");
+          // Apply elegant initial transition classes
+          card.classList.add(
+            "group", "bg-[#f5f0e8]", "border", "border-[#c8a951]/10", "overflow-hidden", 
+            "flex", "flex-col", "h-full", "shadow-sm", "hover:shadow-xl", "hover:border-[#c8a951]/40", 
+            "transition-all", "duration-500", "scale-100", "opacity-100", "reveal", "active"
+          );
+          card.style.animationDelay = `${index * 60}ms`;
+
+          card.innerHTML = `
+            <!-- Product Visual -->
+            <div class="relative aspect-square overflow-hidden bg-[#0f3d22] cursor-pointer" onclick="openLightbox('${p.id}')">
+              <img
+                src="${p.image}"
+                alt="${p.name}"
+                class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+                onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+              />
+              <div class="hidden w-full h-full">
+                ${getSvgFallbackForCategory(p.category)}
+              </div>
+              
+              <!-- Subtle glossy reflection layer overlay -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none transition-opacity duration-300 group-hover:opacity-75 z-10"></div>
+              
+              <!-- Category Badge -->
+              <span class="absolute top-3 left-3 bg-[#0d0d0d]/80 backdrop-blur-sm text-[#e8c97a] text-[10px] uppercase font-bold tracking-widest px-2.5 py-1.5 border border-[#c8a951]/15 z-20">
+                ${p.category}
+              </span>
+
+              <!-- Quick View overlay indicators -->
+              <div class="absolute inset-0 bg-[#0f3d22]/55 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10">
+                <div class="flex flex-col items-center space-y-1 text-[#e8c97a]">
+                  <i data-lucide="zoom-in" class="w-6 h-6 animate-pulse"></i>
+                  <span class="text-[10px] uppercase tracking-widest font-sans-lato font-semibold">Scopri Dettagli</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Text Description Block -->
+            <div class="p-6 flex flex-col flex-grow text-left bg-[#f5f0e8]">
+              <h3 class="font-heading text-lg font-bold text-[#0f3d22] mb-1.5 group-hover:text-[#1a6b3a] transition-colors duration-300">
+                ${p.name}
+              </h3>
+              <p class="font-body text-xs text-[#5a5040] leading-relaxed mb-6 flex-grow font-light">
+                ${p.description}
+              </p>
+              
+              <!-- Button interaction -->
+              <button
+                onclick="openLightbox('${p.id}')"
+                class="w-full py-2.5 text-center text-xs font-semibold tracking-widest uppercase transition-all duration-300 text-[#c8a951] bg-[#0d0d0d] hover:bg-[#1a6b3a] hover:text-[#faf8f4] border border-[#c8a951]/30 hover:border-[#c8a951] cursor-pointer"
+              >
+                Dettagli
+              </button>
+            </div>
+          `;
+          
+          grid.appendChild(card);
+        });
+
+        // Parse newly injected Lucide triggers
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      }
+
+      // Smooth visual categories filtering animation
+      function filterGallery(category, buttonElement) {
+        // Toggle selected tab highlight status
+        document.querySelectorAll(".gallery-tab-btn").forEach(btn => {
+          btn.classList.add("bg-[#f5f0e8]", "text-[#0f3d22]", "border-[#c8a951]/15");
+          btn.classList.remove("bg-[#c8a951]", "text-[#0d0d0d]", "shadow-sm", "border-[#c8a951]");
+        });
+
+        buttonElement.classList.remove("bg-[#f5f0e8]", "text-[#0f3d22]", "border-[#c8a951]/15");
+        buttonElement.classList.add("bg-[#c8a951]", "text-[#0d0d0d]", "shadow-sm", "border-[#c8a951]");
+
+        // Filter products pool
+        if (category === 'Tutti') {
+          currentFilteredList = [...PRODUCTS_SOURCE];
+        } else {
+          currentFilteredList = PRODUCTS_SOURCE.filter(p => p.category === category);
+        }
+
+        // Apply visual shrinkage transition fade
+        const grid = document.getElementById("gallery-grid");
+        grid.style.opacity = "0";
+        grid.style.transform = "scale(0.98)";
+        grid.style.transition = "all 0.3s ease-in-out";
+
+        setTimeout(() => {
+          renderProducts(currentFilteredList);
+          grid.style.opacity = "1";
+          grid.style.transform = "scale(1)";
+        }, 220);
+      }
+
+
+      // --- Lightbox Functional Overlays ---
+
+      function openLightbox(productId) {
+        // Find inside filtered list first to lock slide limits on category context bounds
+        const idx = currentFilteredList.findIndex(p => p.id === productId);
+        if (idx !== -1) {
+          lightboxIndex = idx;
+        } else {
+          // If not in standard filtered pool, search main array source
+          const mainIdx = PRODUCTS_SOURCE.findIndex(p => p.id === productId);
+          if (mainIdx !== -1) {
+            currentFilteredList = [...PRODUCTS_SOURCE];
+            lightboxIndex = mainIdx;
+          } else {
+            return;
+          }
+        }
+
+        updateLightboxContent();
+
+        // Reveal modal triggers
+        const modal = document.getElementById("lightbox-modal");
+        modal.classList.remove("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "hidden";
+      }
+
+      function closeLightbox() {
+        const modal = document.getElementById("lightbox-modal");
+        modal.classList.add("opacity-0", "pointer-events-none");
+        document.body.style.overflow = "";
+      }
+
+      function navigateLightbox(direction) {
+        if (currentFilteredList.length <= 1) return;
+        
+        // Loop bound pagination indices
+        lightboxIndex = (lightboxIndex + direction + currentFilteredList.length) % currentFilteredList.length;
+        
+        // Slide animation effect inside details modal
+        const container = document.getElementById("lightbox-content");
+        container.style.opacity = "0.4";
+        container.style.transition = "opacity 0.15s ease-out";
+        
+        setTimeout(() => {
+          updateLightboxContent();
+          container.style.opacity = "1";
+        }, 150);
+      }
+
+      function updateLightboxContent() {
+        const p = currentFilteredList[lightboxIndex];
+        if (!p) return;
+
+        // Injects heading & titles
+        document.getElementById("lightbox-title").textContent = p.name;
+        document.getElementById("lightbox-desc").textContent = p.longDescription;
+
+        // Injects image layout view with integrated fallback SVGs check
+        const imgBox = document.getElementById("lightbox-image-box");
+        imgBox.innerHTML = `
+          <img
+            src="${p.image}"
+            alt="${p.name}"
+            class="w-full h-full object-cover"
+            onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+          />
+          <div class="hidden w-full h-full">
+            ${getSvgFallbackForCategory(p.category)}
+          </div>
+          <span class="absolute bottom-4 left-4 bg-[#0d0d0d]/90 text-[#c8a951] border border-[#c8a951]/25 px-3 py-1.5 text-xs font-semibold tracking-widest uppercase z-10">
+            ${p.category}
+          </span>
+        `;
+
+        // Dimensions box check
+        const dimBox = document.getElementById("lightbox-dim-box");
+        if (p.dimensions) {
+          dimBox.classList.remove("hidden");
+          document.getElementById("lightbox-dim").textContent = p.dimensions;
+        } else {
+          dimBox.classList.add("hidden");
+        }
+
+        // Bullets feature items injection loop
+        const bulletsContainer = document.getElementById("lightbox-bullets");
+        bulletsContainer.innerHTML = "";
+        p.details.forEach(det => {
+          const li = document.createElement("li");
+          li.classList.add("flex", "items-start", "text-xs", "text-[#5a5040]", "font-medium", "leading-tight");
+          li.innerHTML = `<span class="text-[#c8a951] mr-2">✦</span><span>${det}</span>`;
+          bulletsContainer.appendChild(li);
+        });
+
+        // Direct WhatsApp customized message link builder
+        const buyBtn = document.getElementById("lightbox-buy-btn");
+        const waMsg = `Ciao Serena! Ho visto la tua bellissima creazione in resina "${p.name}" sul tuo catalogo online e vorrei avere maggiori informazioni su come acquistarne o ordinarne una personalizzata!`;
+        buyBtn.setAttribute("href", `https://wa.me/393202348856?text=${encodeURIComponent(waMsg)}`);
+
+        // Re-align Lucide symbols inside Lightbox modal
+        if (window.lucide) {
+          window.lucide.createIcons();
+        }
+      }
+
+
+      // --- Form submissions validation & Redirects ---
+
+      function handleContactSubmit(event) {
+        event.preventDefault();
+        
+        const errBlock = document.getElementById("form-error-block");
+        const errMsg = document.getElementById("form-error-msg");
+        
+        errBlock.classList.add("hidden");
+
+        const nameField = document.getElementById("contact-name").value.trim();
+        const msgField = document.getElementById("contact-msg").value.trim();
+
+        // Required field validations check as described
+        if (!nameField || !msgField) {
+          errMsg.textContent = "Entrambi i campi (Nome e Messaggio) sono obbligatori prima di trasmettere.";
+          errBlock.classList.remove("hidden");
+          return;
+        }
+
+        // Build exact request URL formatting:
+        // wa.me/393202348856?text=Ciao+Serena%2C+sono+[NOME].+[MESSAGGIO]
+        const finalUrl = `https://wa.me/393202348856?text=Ciao+Serena%2C+sono+${encodeURIComponent(nameField)}.+${encodeURIComponent(msgField)}`;
+
+        // Open WhatsApp link on a new blank anchor window tab
+        window.open(finalUrl, "_blank", "noopener,noreferrer");
+      }
+    </script>
   </body>
 </html>
-
