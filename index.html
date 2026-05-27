@@ -40,17 +40,16 @@
         font-family: "Lato", sans-serif;
       }
 
-      /* --- Dynamic Malachite / Green Marble Texture in Pure CSS --- */
+      /* --- Animated Liquid Green Background --- */
+      @keyframes liquidGreenFlow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 100% 50%; }
+        100% { background-position: 0% 50%; }
+      }
       .bg-malachite-pattern {
-        background-color: var(--color-black);
-        background-image: 
-          radial-gradient(ellipse at 15% 25%, rgba(45, 158, 88, 0.28) 0%, transparent 55%),
-          radial-gradient(ellipse at 85% 75%, rgba(26, 107, 58, 0.4) 0%, transparent 65%),
-          radial-gradient(ellipse at 50% 45%, rgba(45, 158, 88, 0.18) 0%, transparent 50%),
-          linear-gradient(135deg, rgba(13, 13, 13, 0.99) 0%, rgba(15, 61, 34, 0.94) 45%, rgba(26, 107, 58, 0.91) 55%, rgba(13, 13, 13, 1) 100%),
-          repeating-radial-gradient(circle at 12% 12%, rgba(45, 158, 88, 0.09) 0px, rgba(45, 158, 88, 0.09) 8px, transparent 16px, transparent 32px),
-          repeating-radial-gradient(circle at 88% 78%, rgba(26, 107, 58, 0.09) 0px, rgba(26, 107, 58, 0.09) 12px, transparent 24px, transparent 48px);
-        background-blend-mode: normal, screen, screen, normal, overlay, overlay;
+        background: linear-gradient(-45deg, #0f3d22, #0a2c18, #1a6b3a, #0d0d0d, #2d9e58);
+        background-size: 400% 400%;
+        animation: liquidGreenFlow 15s ease infinite;
       }
 
       /* Gold thread and light effects */
@@ -65,25 +64,36 @@
       }
 
       /* --- Custom Animations --- */
-      @keyframes floatUp {
+      @keyframes sandFlow {
         0% {
-          transform: translateY(0px) scale(0.6) rotate(0deg);
+          transform: translate(0px, 0px) scale(0.5) rotate(0deg);
           opacity: 0;
         }
-        15% {
+        20% {
+          opacity: 0.8;
+        }
+        80% {
           opacity: 0.6;
         }
-        85% {
-          opacity: 0.45;
-        }
         100% {
-          transform: translateY(-130px) scale(1.3) rotate(180deg);
+          transform: translate(150px, -200px) scale(1.5) rotate(180deg);
           opacity: 0;
         }
       }
 
       .particle-sparkle {
-        animation: floatUp linear infinite;
+        animation: sandFlow linear infinite;
+        filter: blur(1px);
+        mix-blend-mode: screen;
+      }
+
+      @keyframes slowPulse {
+        0% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+        50% { transform: translate(-50%, -50%) scale(1.1); opacity: 0.3; }
+        100% { transform: translate(-50%, -50%) scale(1); opacity: 0.15; }
+      }
+      .liquid-pulse {
+        animation: slowPulse 8s ease-in-out infinite;
       }
 
       /* --- IntersectionObserver Scroll Reveal --- */
@@ -234,7 +244,7 @@
       </div>
       
       <!-- Middle visual radial emission gold glow -->
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-[#1a6b3a]/15 rounded-full blur-[110px] pointer-events-none z-0"></div>
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[280px] sm:w-[500px] h-[280px] sm:h-[500px] bg-[#1a6b3a]/15 rounded-full blur-[110px] pointer-events-none z-0 liquid-pulse"></div>
 
       <!-- Hero main content alignment block -->
       <div class="relative z-20 max-w-4xl text-center space-y-6 md:space-y-8 mt-16">
@@ -1595,24 +1605,25 @@
         document.querySelectorAll(".reveal").forEach(el => rObserver.observe(el));
       }
 
-      // Floating gold-star particles generator
+      // Gold sand particles generator
       function launchGoldDust() {
         const container = document.getElementById("sparkle-container");
         if (!container) return;
         
-        const count = 28;
+        const count = 100;
         for (let i = 0; i < count; i++) {
           const sparkle = document.createElement("div");
           sparkle.classList.add("particle-sparkle", "absolute", "rounded-full", "bg-gradient-to-tr", "from-[#c8a951]", "to-[#e8c97a]");
           
           sparkle.style.left = `${Math.random() * 100}%`;
-          sparkle.style.bottom = "-10px";
-          const size = `${Math.random() * 3 + 2}px`;
+          // Randomize starting vertical position so it doesn't all come from the bottom
+          sparkle.style.top = `${Math.random() * 100}%`;
+          const size = `${Math.random() * 2 + 1}px`;
           sparkle.style.width = size;
           sparkle.style.height = size;
-          sparkle.style.animationDelay = `${Math.random() * -12}s`;
-          sparkle.style.animationDuration = `${Math.random() * 8 + 6}s`;
-          sparkle.style.boxShadow = "0 0 6px rgba(232, 201, 122, 0.8)";
+          sparkle.style.animationDelay = `${Math.random() * -10}s`;
+          sparkle.style.animationDuration = `${Math.random() * 5 + 4}s`;
+          sparkle.style.boxShadow = "0 0 3px rgba(232, 201, 122, 0.9)";
           
           container.appendChild(sparkle);
         }
