@@ -1,0 +1,6 @@
+{
+  "name": "Resin-home Serena",
+  "description": "Sito ufficiale di Resin-home Serena. Creazioni in resina personalizzate e fatte a mano a Grosso Canavese, Torino. Gioielli, Home Decor, Accessori, Orologi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
